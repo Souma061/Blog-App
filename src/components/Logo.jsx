@@ -1,6 +1,6 @@
 function Logo({ width = '140px', showText = true }) {
   return (
-    <div className="flex items-center gap-2 select-none">
+    <div className="flex items-center gap-3 select-none">
       <svg
         width={width}
         viewBox="0 0 120 120"
@@ -36,8 +36,11 @@ function Logo({ width = '140px', showText = true }) {
         <circle cx="92" cy="36" r="8" fill="#ecfeff" stroke="white" strokeWidth="3" />
       </svg>
       {showText && (
-        <span className="font-extrabold text-xl tracking-tight text-white">
-          Post<span className="text-teal-300">Mee</span>
+        <span className="hidden sm:inline-block font-black text-xl tracking-tight text-slate-800">
+          <span className="bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-500 bg-clip-text text-transparent">
+            Post
+          </span>
+          <span className="text-teal-400">Mee</span>
         </span>
       )}
     </div>
