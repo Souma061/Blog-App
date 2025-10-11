@@ -123,9 +123,6 @@ Uses the latest ESLint with React hooks and refresh plugins.
 3. Consider adding tests (integration/unit) where applicable.
 4. Submit a PR with a clear description.
 
-## 📄 License
-
-Specify your license of choice here (e.g., MIT). Update this section to reflect your actual licensing terms.
 
 ---
 
