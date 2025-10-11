@@ -3,7 +3,7 @@ import { z } from 'zod';
 
 const passwordValidate = z
   .string()
-  .min(12, 'Password must be at least 12 characters long')
+  .min(6, 'Password must be at least 6 characters long')
   .max(64, 'Password must be at most 64 characters long')
   .regex(/[A-Z]/, 'Add at least one uppercase letter')
   .regex(/[a-z]/, 'Add at least one lowercase letter')
@@ -40,4 +40,3 @@ export const signUpSchema = z
       });
     }
   });
-
