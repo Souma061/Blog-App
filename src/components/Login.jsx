@@ -47,25 +47,27 @@ function Login() {
     }
   };
   return (
-    <div className="flex items-center justify-center w-full">
-      <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}>
+    <div className="flex w-full items-center justify-center bg-white py-8 transition-colors duration-200 dark:bg-slate-950">
+      <div className="mx-auto w-full max-w-lg rounded-xl border border-black/10 bg-gray-100 p-10 text-slate-800 transition-colors duration-200 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">
         <div className="mb-2 flex justify-center">
           <span className="inline-block w-full max-w-[100px]">
             <Logo width="100%" />
           </span>
         </div>
         <h2 className="text-center text-2xl font-bold leading-tight">Sign in to your account</h2>
-        <p className="mt-2 text-center text-base text-black/60">
+        <p className="mt-2 text-center text-base text-black/60 dark:text-slate-400">
           Don&apos;t have any account?&nbsp;
           <Link
             to="/signup"
-            className="font-medium text-primary transition-all duration-200 hover:underline"
+            className="font-medium text-blue-600 transition-all duration-200 hover:underline dark:text-blue-400"
           >
             Sign Up
           </Link>
         </p>
         {errors.root?.message && (
-          <p className="text-red-500 text-sm text-center my-2">{errors.root.message}</p>
+          <p className="my-2 text-center text-sm text-red-500 dark:text-red-400">
+            {errors.root.message}
+          </p>
         )}
         <form onSubmit={handleSubmit(login)} className="mt-4 space-y-4">
           <div className="space-y-4">
