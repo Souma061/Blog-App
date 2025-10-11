@@ -1,10 +1,10 @@
 import { useCallback, useEffect } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import appwriteService from '../../Appwrite/configurations';
+import { addPost, setError, updatePost } from '../../store/PostSlice';
 import { Button, Input, RTE, Select } from '../index';
-import { addPost, updatePost, setError } from '../../store/PostSlice';
 
 export default function PostForm({ post }) {
   const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
@@ -132,11 +132,20 @@ export default function PostForm({ post }) {
           placeholder="Slug"
           className="mb-4 cursor-text"
           {...register('slug', { required: true })}
-          onInput={(e) => {
-            setValue('slug', slugTransform(e.currentTarget.value), { shouldValidate: true });
-          }}
+          disabled={Boolean(post)}
+          readOnly={Boolean(post)}
         />
-        <RTE label="Content :" name="content" control={control} defaultValue={getValues('content')} />
+        {post && (
+          <p className="text-xs text-gray-500 mt-1">
+            Slug is generated when the post is created and can’t be changed later.
+          </p>
+        )}
+        <RTE
+          label="Content :"
+          name="content"
+          control={control}
+          defaultValue={getValues('content')}
+        />
       </div>
       <div className="w-1/3 px-2">
         <div className="mb-4">
@@ -171,7 +180,11 @@ export default function PostForm({ post }) {
           className="mb-4 cursor-pointer"
           {...register('status', { required: true })}
         />
-        <Button type="submit" bgColor={post ? 'bg-green-500' : undefined} className="w-full cursor-pointer">
+        <Button
+          type="submit"
+          bgColor={post ? 'bg-green-500' : undefined}
+          className="w-full cursor-pointer"
+        >
           {post ? 'Update' : 'Submit'}
         </Button>
       </div>

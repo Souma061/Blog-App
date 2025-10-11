@@ -5,7 +5,14 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 // import { useSelector } from 'react-redux';
 import appwriteService from '../Appwrite/configurations';
 import { Button, Container } from '../components';
-import { setCurrentPost, setError, setLoading } from '../store/PostSlice';
+import {
+  deletePost as removePost,
+  setCurrentPost,
+  setError,
+  setLoading,
+} from '../store/PostSlice';
+
+
 
 export default function Post() {
   // const [post, setPost] = useState(null);
@@ -68,20 +75,20 @@ export default function Post() {
   //     });
   // };
 
-  const deletePost = async () => {
-    if (window.confirm('Are you sure you want to delete this post?')) {
-      try {
-        const status = await appwriteService.deletePost(post.$id);
-        if (status) {
-          await appwriteService.deleteFile(post.featuredImage);
-          dispatch(deletePost(post.$id));
-          navigate('/');
-        }
-      } catch (error) {
-        dispatch(setError(error.message || 'Failed to delete post'));
+const handleDeletePost = async () => {
+  if (!post) return;
+  if (window.confirm('Delete this post?')) {
+    try {
+      if (await appwriteService.deletePost(post.$id)) {
+        await appwriteService.deleteFile(post.featuredImage);
+        dispatch(removePost(post.$id));
+        navigate('/');
       }
+    } catch (error) {
+      dispatch(setError(error.message || 'Failed to delete post'));
     }
-  };
+  }
+};
   if (loading) {
     return (
       <div className="py-8">
@@ -141,7 +148,7 @@ export default function Post() {
               <Link to={`/edit-post/${post.$id}`}>
                 <Button bgColor="bg-green-500">Edit</Button>
               </Link>
-              <Button bgColor="bg-red-500" onClick={deletePost}>
+              <Button bgColor="bg-red-500" onClick={handleDeletePost}>
                 Delete
               </Button>
             </div>
