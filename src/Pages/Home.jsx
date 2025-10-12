@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import appwriteService from '../Appwrite/configurations';
 import { Container, PostCard } from '../components';
 import { setError, setLoading, setPosts } from '../store/PostSlice';
@@ -111,8 +112,8 @@ function Home() {
                     Create your first post and begin your blogging journey.
                   </p>
                   <div className="flex flex-col justify-center gap-4 sm:flex-row">
-                    <a
-                      href="/add-post"
+                    <Link
+                      to="/add-post"
                       className="inline-flex cursor-pointer items-center rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:scale-105 hover:from-blue-600 hover:to-purple-700"
                     >
                       <svg
@@ -129,9 +130,9 @@ function Home() {
                         ></path>
                       </svg>
                       Create Your First Post
-                    </a>
-                    <a
-                      href="/all-posts"
+                    </Link>
+                    <Link
+                      to="/all-posts"
                       className="inline-flex transform cursor-pointer items-center rounded-lg border-2 border-gray-200 bg-white px-6 py-3 font-semibold text-gray-700 transition-all duration-200 hover:scale-105 hover:border-gray-300 hover:bg-gray-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:border-slate-600 dark:hover:bg-slate-700"
                     >
                       <svg
@@ -148,7 +149,7 @@ function Home() {
                         ></path>
                       </svg>
                       View All Posts
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -192,8 +193,8 @@ function Home() {
               <p className="mb-6 text-gray-600 dark:text-slate-400">
                 Join our community and share your unique perspective with the world.
               </p>
-              <a
-                href="/add-post"
+              <Link
+                to="/add-post"
                 className="inline-flex cursor-pointer items-center rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:scale-105 hover:from-blue-600 hover:to-purple-700"
               >
                 <svg className="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -205,7 +206,7 @@ function Home() {
                   ></path>
                 </svg>
                 Write a New Post
-              </a>
+              </Link>
             </div>
           </div>
         </Container>
