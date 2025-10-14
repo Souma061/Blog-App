@@ -13,25 +13,17 @@ export class AuthService {
   }
 
   async createAccount({ email, password, name }) {
-    try {
-      const userAccount = await this.account.create(ID.unique(), email, password, name);
-      if (userAccount) {
-        // another method
-        return this.login({ email, password });
-      } else {
-        return userAccount;
-      }
-    } catch (error) {
-      throw error;
+    const userAccount = await this.account.create(ID.unique(), email, password, name);
+    if (userAccount) {
+      // another method
+      return this.login({ email, password });
+    } else {
+      return userAccount;
     }
   }
 
   async login({ email, password }) {
-    try {
-      return await this.account.createEmailPasswordSession(email, password);
-    } catch (error) {
-      throw error;
-    }
+    return this.account.createEmailPasswordSession(email, password);
   }
 
   async getCurrentUser() {
