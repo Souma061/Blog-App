@@ -47,7 +47,7 @@ function SignUp() {
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-100 via-white to-slate-100 px-6 py-12 transition-colors duration-200 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <div className="w-full max-w-4xl rounded-3xl border border-slate-200/70 bg-white/80 backdrop-blur-2xl shadow-2xl transition-all duration-300 dark:border-white/10 dark:bg-white/10">
         <div className="grid gap-0 md:grid-cols-2">
-          <div className="flex flex-col items-center justify-center border-b border-slate-200/70 bg-white/60 px-10 py-10 text-center transition-colors duration-200 dark:border-white/10 dark:bg-white/5 md:border-b-0 md:border-r">
+          <div className="flex flex-col items-center justify-center border-b border-slate-200/70 bg-white/60 px-6 py-8 text-center transition-colors duration-200 dark:border-white/10 dark:bg-white/5 sm:px-10 sm:py-10 md:border-b-0 md:border-r">
             <span className="mb-6 inline-block w-24 cursor-pointer transition-transform duration-200 hover:scale-105">
               <Logo width="100%" />
             </span>
@@ -65,7 +65,7 @@ function SignUp() {
             </p>
           </div>
 
-          <div className="px-10 py-10">
+          <div className="px-6 py-8 sm:px-10 sm:py-10">
             {errors.root?.message && (
               <p className="mb-6 flex items-center gap-2 rounded-lg border border-red-300 bg-red-100 px-4 py-3 text-sm text-red-600 dark:border-red-400 dark:bg-red-500/10 dark:text-red-200">
                 <span className="text-lg">⚠️</span>

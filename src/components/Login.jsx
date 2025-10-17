@@ -47,8 +47,8 @@ function Login() {
     }
   };
   return (
-    <div className="flex w-full items-center justify-center bg-white py-8 transition-colors duration-200 dark:bg-slate-950">
-      <div className="mx-auto w-full max-w-lg rounded-xl border border-black/10 bg-gray-100 p-10 text-slate-800 transition-colors duration-200 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">
+    <div className="flex w-full items-center justify-center bg-white px-4 py-8 transition-colors duration-200 dark:bg-slate-950 sm:px-6">
+      <div className="mx-auto w-full max-w-lg rounded-xl border border-black/10 bg-gray-100 p-6 text-slate-800 transition-colors duration-200 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 sm:p-10">
         <div className="mb-2 flex justify-center">
           <span className="inline-block w-full max-w-[100px]">
             <Logo width="100%" />
