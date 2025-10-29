@@ -191,6 +191,12 @@ function Header() {
               </li>
             ) : null
           )}
+          <li
+            key="language-switcher-mobile"
+            className="flex w-full items-center justify-center py-2"
+          >
+            <LanguageSwitcher />
+          </li>
           <li key="theme-toggle-mobile">{renderThemeToggle('mobile')}</li>
           {authStatus && (
             <li key="mobile-logout" className="pt-1">
