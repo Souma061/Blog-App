@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import appwriteService from '../Appwrite/configurations';
@@ -6,18 +7,9 @@ import { Container, PostCard } from '../components';
 import { setError, setLoading, setPosts } from '../store/PostSlice';
 
 function Home() {
-  // const [posts, setPosts] = useState([]);
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { posts, loading, error } = useSelector((state) => state.post);
-  // useEffect(() => {
-  //   appwriteService.listPosts().then((posts) => {
-  //     if (posts) {
-  //       setPosts(posts.documents);
-  //     } else {
-  //       setPosts([]);
-  //     }
-  //   });
-  // }, []);
   useEffect(() => {
     const fetchposts = async () => {
       dispatch(setLoading(true));
@@ -28,14 +20,14 @@ function Home() {
             setPosts({
               posts: response.documents,
               totalPosts: response.total || response.documents.length || 0,
-            }),
+            })
           );
         } else {
           dispatch(
             setPosts({
               posts: [],
               totalPosts: 0,
-            }),
+            })
           );
         }
       } catch (error) {
@@ -52,7 +44,9 @@ function Home() {
       <div className="flex min-h-screen items-center justify-center bg-white transition-colors duration-200 dark:bg-slate-950">
         <div className="text-center text-gray-700 dark:text-slate-200">
           <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-blue-600 dark:border-blue-400"></div>
-          <p className="text-gray-600 dark:text-slate-400">Loading posts...</p>
+          <p className="text-gray-600 dark:text-slate-400">
+            {t('loading_posts')}
+          </p>
         </div>
       </div>
     );
@@ -61,12 +55,14 @@ function Home() {
     return (
       <div className="flex min-h-screen items-center justify-center bg-white transition-colors duration-200 dark:bg-slate-950">
         <div className="text-center text-gray-700 dark:text-slate-200">
-          <p className="mb-4 text-red-600 dark:text-red-400">Error: {error}</p>
+          <p className="mb-4 text-red-600 dark:text-red-400">
+            {t('error')}: {error}
+          </p>
           <button
             onClick={() => window.location.reload()}
             className="rounded-lg bg-blue-600 px-4 py-2 text-white transition-colors duration-200 hover:bg-blue-700"
           >
-            Retry
+            {t('retry')}
           </button>
         </div>
       </div>
@@ -98,18 +94,17 @@ function Home() {
                   </div>
                 </div>
                 <h1 className="mb-6 text-4xl font-bold leading-tight text-gray-800 md:text-5xl dark:text-slate-100">
-                  Welcome to Your Blog
+                  {t('welcome_to_blog')}
                 </h1>
                 <p className="mb-8 text-xl leading-relaxed text-gray-600 dark:text-slate-400">
-                  Your creative space awaits! Start sharing your thoughts, stories, and ideas with
-                  the world.
+                  {t('creative_space')}
                 </p>
                 <div className="rounded-2xl border border-gray-100 bg-white p-8 shadow-lg transition-colors duration-200 dark:border-slate-700 dark:bg-slate-900">
                   <h2 className="mb-4 text-2xl font-semibold text-gray-700 dark:text-slate-100">
-                    Ready to get started?
+                    {t('ready_to_get_started')}
                   </h2>
                   <p className="mb-6 text-gray-500 dark:text-slate-400">
-                    Create your first post and begin your blogging journey.
+                    {t('create_first_post_prompt')}
                   </p>
                   <div className="flex flex-col justify-center gap-4 sm:flex-row">
                     <Link
@@ -129,7 +124,7 @@ function Home() {
                           d="M12 4v16m8-8H4"
                         ></path>
                       </svg>
-                      Create Your First Post
+                      {t('create_first_post')}
                     </Link>
                     <Link
                       to="/all-posts"
@@ -148,7 +143,7 @@ function Home() {
                           d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
                         ></path>
                       </svg>
-                      View All Posts
+                      {t('view_all_posts')}
                     </Link>
                   </div>
                 </div>
@@ -167,10 +162,10 @@ function Home() {
           {/* Hero Section */}
           <div className="mb-16 text-center text-slate-800 dark:text-slate-100">
             <h1 className="mb-4 text-4xl font-bold text-gray-800 md:text-5xl dark:text-slate-100">
-              Latest Posts
+              {t('hero_latest_posts')}
             </h1>
             <p className="mx-auto max-w-2xl text-xl text-gray-600 dark:text-slate-400">
-              Discover amazing stories, insights, and ideas from our community of writers.
+              {t('hero_discover')}
             </p>
             <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-gradient-to-r from-blue-500 to-purple-600"></div>
           </div>
@@ -178,7 +173,10 @@ function Home() {
           {/* Posts Grid */}
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {posts.map((post) => (
-              <div key={post.$id} className="transform transition-all duration-300 hover:scale-105">
+              <div
+                key={post.$id}
+                className="transform transition-all duration-300 hover:scale-105"
+              >
                 <PostCard {...post} />
               </div>
             ))}
@@ -188,16 +186,21 @@ function Home() {
           <div className="text-center mt-16">
             <div className="mx-auto max-w-2xl rounded-2xl border border-gray-100 bg-white p-8 text-slate-800 shadow-lg transition-colors duration-200 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">
               <h3 className="mb-4 text-2xl font-semibold text-gray-800 dark:text-slate-100">
-                Have something to share?
+                {t('have_something_to_share')}
               </h3>
               <p className="mb-6 text-gray-600 dark:text-slate-400">
-                Join our community and share your unique perspective with the world.
+                {t('join_community_prompt')}
               </p>
               <Link
                 to="/add-post"
                 className="inline-flex cursor-pointer items-center rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:scale-105 hover:from-blue-600 hover:to-purple-700"
               >
-                <svg className="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg
+                  className="mr-2 h-5 w-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -205,7 +208,7 @@ function Home() {
                     d="M12 4v16m8-8H4"
                   ></path>
                 </svg>
-                Write a New Post
+                {t('write_new_post')}
               </Link>
             </div>
           </div>

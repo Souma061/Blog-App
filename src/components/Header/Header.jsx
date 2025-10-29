@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { toggleTheme } from '../../store/themeSlice';
 import { Container, Logo, LogoutBtn } from '../index';
+import LanguageSwitcher from '../LanguageSwitcher';
 
 function Header() {
+  const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const authStatus = useSelector((state) => state.auth.status);
   const themeMode = useSelector((state) => state.theme.mode);
@@ -12,27 +15,27 @@ function Header() {
   const navigate = useNavigate();
   const navItems = [
     {
-      name: 'Home',
+      name: t('home'),
       slug: '/',
       active: true,
     },
     {
-      name: 'Login',
+      name: t('login'),
       slug: '/login',
       active: !authStatus,
     },
     {
-      name: 'Signup',
+      name: t('signup'),
       slug: '/signup',
       active: !authStatus,
     },
     {
-      name: 'All Posts',
+      name: t('all_posts'),
       slug: '/all-posts',
       active: authStatus,
     },
     {
-      name: 'Add Post',
+      name: t('add_post'),
       slug: '/add-post',
       active: authStatus,
     },
@@ -83,7 +86,11 @@ function Header() {
               <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M21 12.79A9 9 0 0111.21 3 7 7 0 0012 17a7 7 0 009-4.21z" />
               </svg>
-              <span className={isMobile ? 'text-sm font-medium' : 'hidden sm:inline'}>
+              <span
+                className={
+                  isMobile ? 'text-sm font-medium' : 'hidden sm:inline'
+                }
+              >
                 {isMobile ? 'Light mode' : 'Light'}
               </span>
             </>
@@ -103,7 +110,11 @@ function Header() {
                 />
                 <circle cx="12" cy="12" r="3" />
               </svg>
-              <span className={isMobile ? 'text-sm font-medium' : 'hidden sm:inline'}>
+              <span
+                className={
+                  isMobile ? 'text-sm font-medium' : 'hidden sm:inline'
+                }
+              >
                 {isMobile ? 'Dark mode' : 'Dark'}
               </span>
             </>
@@ -127,9 +138,12 @@ function Header() {
               {item.name}
             </button>
           </li>
-        ) : null,
+        ) : null
       )}
-      <li key="theme-toggle-desktop">{renderThemeToggle('desktop')}</li>
+      <li>
+        <LanguageSwitcher />
+      </li>
+      <li key="theme-toggle">{renderThemeToggle()}</li>
       {authStatus && (
         <li key="logout" className="pl-1">
           <LogoutBtn />
@@ -167,11 +181,15 @@ function Header() {
                     viewBox="0 0 24 24"
                     aria-hidden="true"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M9 5l7 7-7 7"
+                    />
                   </svg>
                 </button>
               </li>
-            ) : null,
+            ) : null
           )}
           <li key="theme-toggle-mobile">{renderThemeToggle('mobile')}</li>
           {authStatus && (
@@ -208,12 +226,32 @@ function Header() {
                 aria-controls="mobile-navigation"
               >
                 {isMenuOpen ? (
-                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M6 18L18 6M6 6l12 12" />
+                  <svg
+                    className="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.5"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
                   </svg>
                 ) : (
-                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 6h16M4 12h16M4 18h16" />
+                  <svg
+                    className="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.5"
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
                   </svg>
                 )}
               </button>
