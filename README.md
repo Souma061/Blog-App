@@ -16,6 +16,8 @@ Your modern blogging playground built with React, Tailwind CSS, and Appwrite.
 - **State Management** – Redux Toolkit slices for auth, posts, and theming.
 - **Form Validation** – React Hook Form paired with Zod schemas for robust input checking.
 - **Safe Rendering** – DOMPurify and html-react-parser ensure sanitized post content.
+- **Internationalization (i18n)** – Full multi-language support using i18next and react-i18next, with JSON translation files and dynamic language switching.
+- **Language Switcher** – Modern, glassmorphic language selector in the header, fully mobile-friendly and accessible from the mobile menu.
 
 ## 🧱 Tech Stack
 
@@ -28,6 +30,7 @@ Your modern blogging playground built with React, Tailwind CSS, and Appwrite.
 | UI        | Tailwind CSS 4, custom components  |
 | Editor    | TinyMCE React integration          |
 | Backend   | Appwrite (Auth, Database, Storage) |
+| i18n      | i18next, react-i18next, lingo.dev  |
 | Utilities | DOMPurify, html-react-parser       |
 | Tooling   | ESLint, @vitejs/plugin-react       |
 
@@ -52,6 +55,7 @@ VITE_APPWRITE_DATABASE_ID=
 VITE_APPWRITE_COLLECTION_ID=
 VITE_APPWRITE_BUCKET_ID=
 VITE_TINYMCE_API_KEY=
+VITE_LINGO_DEV_API_KEY=
 ```
 
 > ℹ️ In Appwrite, ensure your database collection IDs and bucket IDs match the values above, and allow the desired image extensions (e.g., jpg, jpeg, png, gif).
@@ -64,7 +68,15 @@ npm run dev
 
 Open http://localhost:5173/ to explore PostMee locally.
 
-### 4. Additional Scripts
+### 4. Internationalization (i18n)
+
+The app supports multiple languages (English, French) using i18next and react-i18next. All UI text is translatable, and you can add more languages by editing the JSON files in `src/locales/`.
+
+- **Switch Language:** Use the language selector in the header (visible on both desktop and mobile) to instantly switch languages.
+- **Add Languages:** Add new translation files (e.g., `es.json`) and update i18n config.
+- **Batch Translation:** Use the included `translate.cjs` script with lingo.dev to generate translations for new languages.
+
+### 5. Additional Scripts
 
 | Command           | Description                       |
 | ----------------- | --------------------------------- |
@@ -79,9 +91,10 @@ Open http://localhost:5173/ to explore PostMee locally.
 src/
 	App.jsx                # Entry layout with theme sync and routing outlet
 	Appwrite/              # Appwrite auth + CRUD services
-	components/            # Reusable UI elements (Header, forms, RTE, etc.)
+	components/            # Reusable UI elements (Header, forms, RTE, LanguageSwitcher, etc.)
 	Pages/                 # Route screens (Home, AllPost, Post, Add/Edit, Auth)
 	store/                 # Redux slices (auth, post, theme)
+	locales/               # i18n translation JSON files (en.json, fr.json, ...)
 	utlis/                 # Zod schemas for validation
 ```
 
@@ -101,11 +114,12 @@ Key flow:
   - Featured image uploads to Appwrite Storage with type validation.
 - Edit/delete actions verify author identity before performing operations.
 
-## 🌓 Theming
+## 🌓 Theming & Language
 
 - Tailwind `darkMode: 'class'` (see `tailwind.config.js`).
 - Redux slice `themeSlice` stores `light` or `dark` mode; persisted in `localStorage`.
 - Header toggle updates the slice and toggles the root `<html>` class.
+- Language selector in the header and mobile menu allows instant language switching.
 - Components include matching `dark:` Tailwind utilities for backgrounds, text, and borders.
 
 ## 🧪 Linting & Quality
@@ -123,10 +137,13 @@ Uses the latest ESLint with React hooks and refresh plugins.
 3. Consider adding tests (integration/unit) where applicable.
 4. Submit a PR with a clear description.
 
+---
 
 ---
 
-Enjoy using PostMee! Feel free to open issues or feature requests to shape its future.
+**Special thanks to [lingo.dev](https://lingo.dev) for powering our fast and easy translation workflow!**
+
+Enjoy using PostMee! Now with full internationalization and a beautiful, mobile-friendly language switcher. Feel free to open issues or feature requests to shape its future.
 
 # React + Vite
 
